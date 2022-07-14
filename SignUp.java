@@ -84,7 +84,7 @@ public class SignUp{
             //System.out.println(uname);
             File fi=new File("C:\\Users\\USER\\Desktop\\tanmayee\\password.txt");
             write(pass +"\n",fi);
-            System.out.println("The aacount has been created");
+            System.out.println("The account has been created");
             for(int i=0;i<arr.length;i++){
                 arr[i]=s1.nextLine();
             }
@@ -195,7 +195,8 @@ public class SignUp{
         catch(Exception e){
             return null;
         }
-    }    public static String[] search(String file){// converting the data of the file into array and storing 
+    }    
+    public static String[] search(String file){// converting the data of the file into array and storing 
         try{
             File f =new File(file);
             Scanner scann=new Scanner(f);
@@ -357,19 +358,24 @@ public class SignUp{
             return null;
         }
     }
-    /*public static void writer(String id,File fi)throws IOException{//creating a method to write the data to file
+    public static void wr(String id,File fi)throws IOException{//creating a method to write the data to file
         FileWriter fwr=new FileWriter(fi,true);
-        PrintWriter pw=new PrintWriter(fw);
-        fwr.riter(id);
+        //PrintWriter pw=new PrintWriter(fw);
+        fwr.write(id);
         fwr.close();
-    }*/
+    }
     //public static Scanner scan=new Scanner(System.in);
     public static String feedback(String file){
         Scanner sca=new Scanner(System.in);
         System.out.println("Enter the feedback you want to give:");
         String fil=sca.nextLine();
         File fi=new File("C:\\Users\\USER\\Desktop\\tanmayee\\feedback.txt");
-        //writer(fil,fi);
+        try{
+            wr(fil+"\n",fi);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
         System.out.println("The feedback given by you is "+fil);
         return " ";
     }
@@ -440,6 +446,93 @@ public class SignUp{
             }
             else{
                 System.out.println("Details doesn't match");
+                String[] data5=adminname("names.txt");
+            }
+            return arr;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    public static String[] addbook(String file){// converting the data of the file into array and storing 
+        try{
+            File f =new File(file);
+            Scanner s=new Scanner(f);
+            int c=0;
+            int flag=0;
+            while(s.hasNextLine()){
+                c++;
+                s.nextLine();
+            }
+            String[] arr=new String[c];
+            Scanner s1=new Scanner(f);
+            for(int i=0;i<arr.length;i++){
+                arr[i]=s1.nextLine();
+            }
+            System.out.println("Enter the bookname:");
+            String uname=sc.next();
+            //System.out.print(uname);
+            for(int i=0;i<arr.length;i++){
+                //System.out.println(arr[i]);
+                if(uname.equals(arr[i])){//making sure the username is not repeated
+                    flag=1;
+                    break;
+                }
+                else{
+                    flag=0;
+                }
+            }
+            if(flag==1){
+                System.out.println("The book already exists");
+                System.out.print("So please update the stock");
+            }
+            else{
+                int i;
+                String x;
+                i=arr.length;
+                File fi=new File("C:\\Users\\USER\\Desktop\\tanmayee\\bookname.txt");
+                write(uname +"\n",fi);
+                String [] data1=addbook1("count.txt");//if the user is new then he need to create a password
+                //System.out.println("The data has been appended succesfully");
+                arr[i]=s1.nextLine();
+
+            }
+            return arr;
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
+    public static Scanner scna=new Scanner(System.in);
+    //String id=s.next();
+    /*public static void writes(String id,File fi)throws IOException{
+        FileWriter fw=new FileWriter(fi,true);
+        fw.write(id);
+        fw.close();
+    }*/
+    public static String[] addbook1(String file){
+        try{
+            File f =new File(file);
+            Scanner s=new Scanner(f);
+            int c=0;
+            int flag=0;
+            while(s.hasNextLine()){
+                c++;
+                s.nextLine();
+            }
+            String[] arr=new String[c];
+            Scanner s1=new Scanner(f);
+            /*for(int i=0;i<arr.length;i++){
+                arr[i]=s1.nextLine();
+            }*/
+            System.out.println("Enter the count:");
+            String pass=scna.next();
+            //System.out.println(uname);
+            File fi=new File("C:\\Users\\USER\\Desktop\\tanmayee\\count.txt");
+            write(pass +"\n",fi);
+            System.out.println("The book has been updated");
+            for(int i=0;i<arr.length;i++){
+                arr[i]=s1.nextLine();
             }
             return arr;
         }
@@ -449,10 +542,9 @@ public class SignUp{
     }
 
 
-
     public static void main(String [] args)throws IOException{
         System.out.println( "welcome to VVIT LMS");
-        System.out.println("Click 1 for SignUp \nClick 2 for LogIn");
+        System.out.println("Enter 1 for SignUp \nEnter 2 for LogIn");
         Scanner scan=new Scanner(System.in);
         int choice=scan.nextInt();
         switch(choice){
@@ -470,7 +562,7 @@ public class SignUp{
             System.out.println("Enter the password:");
             String pwd=scan.next();*/
         }
-        System.out.println("Click 1 to search a book and for book availability \nClick 2 for reserving the book \nClick 3 for feedback \nClick 4 if you want to login as admin");
+        System.out.println("Enter 1 to search a book and for book availability \nEnter 2 for reserving the book \nEnter 3 for feedback \nEnter 4 if you want to login as admin");
         Scanner sca=new Scanner(System.in);
         int choice1=sca.nextInt();
         switch(choice1){
@@ -525,17 +617,19 @@ public class SignUp{
             case 3:
             String data3=feedback("feedback.txt");
             Scanner sac=new Scanner(System.in);
-            System.out.println("Do you want to login as admin\nClick y want to login and anything not to");
+            System.out.println("If you want to login as admin please login again");
+            break;
+            /*System.out.println("Do you want to login as admin\nClick y want to login and anything not to");
             String c4=sac.next();
             if(c4.equals("y")){
 
             }
             else{
                 break;
-            }
+            }*/
             case 4:
             String[] data5=adminname("names.txt");
-            System.out.println("Click 1 to issue book \nClick 2 to return book \nClick 3 to add book");
+            System.out.println("Enter 1 to issue book \nEnter 2 to return book \nEnter 3 to add book \nEnter 4 to update stock ");
             Scanner scann=new Scanner(System.in);
             int choice2=scann.nextInt();
             switch(choice2){
@@ -546,8 +640,13 @@ public class SignUp{
                 System.out.println("you are here to update the details of returned book");
                 break;
                 case 3:
-                System.out.println("you are here to add a new book");
+                String[] data10=addbook("bookname.txt");
+                //System.out.println("you are here to add a new book");
                 break;
+                case 4:
+                //String[] data0=updatestock("bookname.txt");
+                break;
+                
             }
 
         }
